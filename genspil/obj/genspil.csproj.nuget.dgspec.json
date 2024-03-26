@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Don Domingo\\Source\\Repos\\Genspil\\genspil.csproj": {}
+    "C:\\Users\\Don Domingo\\source\\repos\\lwhp\\Genspil\\genspil\\genspil.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Don Domingo\\Source\\Repos\\Genspil\\genspil.csproj": {
+    "C:\\Users\\Don Domingo\\source\\repos\\lwhp\\Genspil\\genspil\\genspil.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Don Domingo\\Source\\Repos\\Genspil\\genspil.csproj",
+        "projectUniqueName": "C:\\Users\\Don Domingo\\source\\repos\\lwhp\\Genspil\\genspil\\genspil.csproj",
         "projectName": "genspil",
-        "projectPath": "C:\\Users\\Don Domingo\\Source\\Repos\\Genspil\\genspil.csproj",
+        "projectPath": "C:\\Users\\Don Domingo\\source\\repos\\lwhp\\Genspil\\genspil\\genspil.csproj",
         "packagesPath": "C:\\Users\\Don Domingo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Don Domingo\\source\\repos\\genspil\\obj\\",
+        "outputPath": "C:\\Users\\Don Domingo\\source\\repos\\lwhp\\Genspil\\genspil\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Don Domingo\\AppData\\Roaming\\NuGet\\NuGet.Config",

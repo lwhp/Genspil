@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Don Domingo\\source\\repos\\genspil\\genspil.csproj",
+      "projectUniqueName": "C:\\Users\\Don Domingo\\Source\\Repos\\lwhp\\Genspil\\genspil\\genspil.csproj",
       "projectName": "genspil",
-      "projectPath": "C:\\Users\\Don Domingo\\source\\repos\\genspil\\genspil.csproj",
+      "projectPath": "C:\\Users\\Don Domingo\\Source\\Repos\\lwhp\\Genspil\\genspil\\genspil.csproj",
       "packagesPath": "C:\\Users\\Don Domingo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Don Domingo\\source\\repos\\genspil\\obj\\",
+      "outputPath": "C:\\Users\\Don Domingo\\Source\\Repos\\lwhp\\Genspil\\genspil\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Don Domingo\\AppData\\Roaming\\NuGet\\NuGet.Config",
