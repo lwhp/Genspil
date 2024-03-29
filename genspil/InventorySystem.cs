@@ -16,12 +16,46 @@ namespace genspil
         //Public InventorySystem er en constructor der opretter et InventorySystem objekt og initialiserer listen af boardgames.
         public List<Boardgame> Boardgames { get; set; }
         public List<Employee> Employees { get; set; }
-        //Boardgames er en property der kan tilgås og ændres udefra.
+        
 
-        public void AddGame(Boardgame boardgame)
+        public void AddGame()
         {
+           Console.WriteLine("Enter name:");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter genre:");
+            string genre = Console.ReadLine();
+            Console.WriteLine("Enter min players:");
+            if (!int.TryParse(Console.ReadLine(), out int minPlayers))
+            {
+                Console.WriteLine("Invalid input");
+                return;
+            }   
+            Console.WriteLine("Enter max players:");
+            if (!int.TryParse(Console.ReadLine(), out int maxPlayers))
+            {
+                Console.WriteLine("Invalid input");
+                return;
+            }
+            Console.WriteLine("Enter condition:");
+            Console.WriteLine("Enter condition (New, Used, Damaged): ");
+            string conditionInput = Console.ReadLine();
+            Condition condition;
+            if (!Enum.TryParse(conditionInput, true, out condition))
+            {
+                Console.WriteLine("Invalid condition. Setting to 'New' as default.");
+                condition = Condition.New;
+            }
+            Console.WriteLine("Enter price:");
+            if (!float.TryParse(Console.ReadLine(), out float price))
+            {
+                Console.WriteLine("Invalid input");
+                return;
+            }
+            Console.WriteLine("Enter boardgame ID:");
+            string boardgameID = Console.ReadLine();
+            Boardgame boardgame = new Boardgame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
             Boardgames.Add(boardgame);
-        }
+            }
         //AddGame metoden er en metode der tager et boardgame objekt som parameter og tilføjer det til listen af boardgames.
 
         public void UpdateGame(Boardgame boardgame)
