@@ -80,9 +80,19 @@ namespace genspil
 
         public void PrintInventoryList()
         {
+            int gameCount = 1;
             foreach (Boardgame boardgame in Boardgames)
             {
-                Console.WriteLine(boardgame.Name);
+                Console.WriteLine("Game " + gameCount);
+                Console.WriteLine($"Name: {boardgame.Name}");
+                Console.WriteLine($"Genre: {boardgame.Genre}");
+                Console.WriteLine($"Players: {boardgame.MinPlayers} - {boardgame.MaxPlayers}");
+                Console.WriteLine($"Condition: {boardgame.Conditions}");
+                Console.WriteLine($"Price: {boardgame.Price}");
+                Console.WriteLine($"Boardgame ID: {boardgame.BoardgameID}");
+                Console.WriteLine("______________________________");
+                gameCount++;
+                
             }
         }
     }

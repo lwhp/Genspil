@@ -4,11 +4,11 @@
     {
         static void Main(string[] args)
         {
-            while(true)
+            InventorySystem inventorySystem = new InventorySystem();
+            while (true)
             {
              
             Console.WriteLine("Genspil Inventory System");
-            InventorySystem inventorySystem = new InventorySystem();
             Console.WriteLine("1. Add game");
             Console.WriteLine("2. Update game");
             Console.WriteLine("3. Delete game");
@@ -80,6 +80,11 @@
                         //    Inquiry inquiry = new Inquiry(inquiryID, inquiryDescription, customer);
                         //    inventorySystem.RegisterInquiry(inquiry);
                         //    break;
+                        case "6":
+                        inventorySystem.PrintInventoryList();
+                        Console.WriteLine("press any key to go back to main menu");
+                        break;
+
                 }
             }
 
