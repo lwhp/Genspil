@@ -32,10 +32,5 @@ namespace genspil
         }
         //InquiryStatus er en enum der indeholder de forskellige statusser et inquiry objekt kan have. Enum er en datatype der kan have en af en række foruddefinerede værdier.
 
-        public void UpdateStatus(InquiryStatus newStatus)
-        {
-            Status = newStatus;
-        }
-        //UpdateStatus metoden er en metode der tager en ny status som parameter og opdaterer status på inquiry objektet.
     }
 }

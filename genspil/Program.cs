@@ -1,4 +1,6 @@
-﻿namespace genspil
+﻿using System.Runtime.CompilerServices;
+
+namespace genspil
 {
     internal class Program
     {
@@ -14,76 +16,76 @@
             Console.WriteLine("3. Delete game");
             Console.WriteLine("4. Search game");
             Console.WriteLine("5. Register inquiry");
-            Console.WriteLine("6. Print inventory list");
-            Console.WriteLine("7. Print customer inquiries");
-            Console.WriteLine("8. Exit");
+            Console.WriteLine("6. Update Inquiry");
+            Console.WriteLine("7. Print inventory list");
+            Console.WriteLine("8. Print customer inquiries");
+            Console.WriteLine("9. Exit");
             Console.WriteLine("Choose an option: ");
             string option = Console.ReadLine();
 
                 switch (option)
                 {
                     case "1":
-                       inventorySystem.AddGame();
-
+                        inventorySystem.AddGame();
+                        Console.WriteLine("press any key to go back to main menu");
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
                     case "2":
-                        Console.WriteLine("Enter boardgame ID: ");
-                        string updateID = Console.ReadLine();
-                        Boardgame updateGame = inventorySystem.Boardgames.Find(x => x.BoardgameID == updateID); //Find game by ID in list of boardgames in inventorySystem object and assign to updateGame variable 
-                        Console.WriteLine("Enter new name: ");
-                        updateGame.Name = Console.ReadLine();
-                        Console.WriteLine("Enter new genre: ");
-                        updateGame.Genre = Console.ReadLine();
-                        Console.WriteLine("Enter new min players: ");
-                        updateGame.MinPlayers = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Enter new max players: ");
-                        updateGame.MaxPlayers = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Enter new condition: ");
-                        Console.WriteLine("Enter new condition (New, Used, Damaged): ");
-                        string newConditionInput = Console.ReadLine();
-                        Condition newCondition;
-                        if (Enum.TryParse(newConditionInput, true, out newCondition))
+                        inventorySystem.UpdateGame();
+                        Console.WriteLine("press any key to go back to main menu");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case "3":
+                        inventorySystem.DeleteGame();
+                        Console.WriteLine("press any key to go back to main menu");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case "4":
+                        inventorySystem.SearchGame();
+                        Console.WriteLine("press any key to go back to main menu");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case "5":
+                        inventorySystem.RegisterInquiry();
+                        Console.WriteLine("press any key to go back to main menu");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case "6":
+                        inventorySystem.UpdateInquiry();
+                        Console.WriteLine("press any key to go back to main menu");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case "7":
+                        inventorySystem.PrintInventoryList();
+                        Console.WriteLine("press any key to go back to main menu");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case "8":
+                        inventorySystem.PrintInquiries();
+                        Console.WriteLine("press any key to go back to main menu");
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case "9":
+                       Console.WriteLine("Are you sure you want to exit? (y/n)");
+                        string exit = Console.ReadLine();
+                        if (exit == "y")
                         {
-                            updateGame.Conditions = newCondition;
+                            Environment.Exit(0);
+                            return;
                         }
                         else
                         {
-                            Console.WriteLine("Invalid condition. Please enter a valid condition (New, Used, Damaged).");
-
+                            Console.Clear();
                         }
-                        Console.WriteLine("Enter new price: ");
-                        updateGame.Price = float.Parse(Console.ReadLine());
-                        break;
-                    case "3":
-                        Console.WriteLine("Enter boardgame ID: ");
-                        string deleteID = Console.ReadLine();
-                        Boardgame deleteGame = inventorySystem.Boardgames.Find(x => x.BoardgameID == deleteID);
-                        inventorySystem.DeleteGame(deleteGame);
-                        break;
-                    case "4":
-                        Console.WriteLine("Enter search term: ");
-                        string search = Console.ReadLine();
-                        inventorySystem.SearchGame(search);
-                        break;
-                        //case "5":
-                        //    Console.WriteLine("Enter customer name: ");
-                        //    string customerName = Console.ReadLine();
-                        //    Console.WriteLine("Enter customer email: ");
-                        //    string customerEmail = Console.ReadLine();
-                        //    Console.WriteLine("Enter customer ID: ");
-                        //    string customerID = Console.ReadLine();
-                        //    Customer customer = new Customer(customerName, customerEmail, customerID);
-                        //    Console.WriteLine("Enter inquiry ID: ");
-                        //    string inquiryID = Console.ReadLine();
-                        //    Console.WriteLine("Enter inquiry description: ");
-                        //    string inquiryDescription = Console.ReadLine();
-                        //    Inquiry inquiry = new Inquiry(inquiryID, inquiryDescription, customer);
-                        //    inventorySystem.RegisterInquiry(inquiry);
-                        //    break;
-                        case "6":
-                        inventorySystem.PrintInventoryList();
-                        Console.WriteLine("press any key to go back to main menu");
-                        break;
+                        return;
 
                 }
             }
