@@ -8,11 +8,12 @@ namespace genspil
 {
     internal class Inquiry
     {
-        public Inquiry(InquiryStatus status, Customer customer, DateTime creationDate)
+        public Inquiry(InquiryStatus status, Customer customer, DateTime creationDate, Boardgame boardgame)
         {
             Status = status;
             Customer = customer;
             CreationDate = creationDate;
+            Boardgame = boardgame;
         }
         //Public Inquiry er en constructor der tager status, customerID og creationDate som parametre og opretter et Inquiry objekt.
 

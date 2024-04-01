@@ -148,8 +148,11 @@ namespace genspil
             string customerEmail = Console.ReadLine();
             Console.WriteLine("Enter customer ID: ");
             string customerID = Console.ReadLine();
+            Console.WriteLine("Enter Boardgame name: ");
+            string boardgameName = Console.ReadLine();
+            Boardgame boardgame = new Boardgame(boardgameName, "", 0, 0, Condition.New, 0, "");
             Customer customer = new Customer(customerName, customerEmail, customerID);
-            Inquiry newInquiry = new Inquiry(Inquiry.InquiryStatus.Open, customer, DateTime.Now);
+            Inquiry newInquiry = new Inquiry(Inquiry.InquiryStatus.Open, customer, DateTime.Now, boardgame);
             customer.Inquiries.Add(newInquiry);
         }
         //RegisterInquiry metoden er en metode der tager et inquiry objekt som parameter og tilføjer det til customerens liste af inquiries.

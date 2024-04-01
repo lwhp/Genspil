@@ -85,7 +85,7 @@ namespace genspil
                         {
                             Console.Clear();
                         }
-                        return;
+                        break;
 
                 }
             }
