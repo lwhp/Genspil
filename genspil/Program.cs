@@ -10,17 +10,20 @@ namespace genspil
             while (true)
             {
              
-            Console.WriteLine("Genspil Inventory System");
-            Console.WriteLine("1. Add game");
-            Console.WriteLine("2. Update game");
-            Console.WriteLine("3. Delete game");
-            Console.WriteLine("4. Search game");
-            Console.WriteLine("5. Register inquiry");
-            Console.WriteLine("6. Update Inquiry");
-            Console.WriteLine("7. Print inventory list");
-            Console.WriteLine("8. Print customer inquiries");
-            Console.WriteLine("9. Exit");
-            Console.WriteLine("Choose an option: ");
+            Console.WriteLine(
+                "Genspil Inventory System \n" + 
+                "1. Add game \n" +
+                "2. Update game \n" +
+                "3. Delete game \n" +
+                "4. Search game \n" +
+                "5. Register inquiry \n" +
+                "6. Update Inquiry \n" +
+                "7. Print inventory list \n" +
+                "8. Print customer inquiries \n" +
+                "9. Exit \n" +
+                "Choose an option: "
+            );
+
             string option = Console.ReadLine();
 
                 switch (option)
