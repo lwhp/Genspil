@@ -6,22 +6,14 @@ using System.Threading.Tasks;
 
 namespace genspil
 {
-    internal class Inquiry
+    internal class Inquiry(Inquiry.InquiryStatus status, Customer customer, DateTime creationDate, Boardgame boardgame)
     {
-        public Inquiry(InquiryStatus status, Customer customer, DateTime creationDate, Boardgame boardgame)
-        {
-            Status = status;
-            Customer = customer;
-            CreationDate = creationDate;
-            Boardgame = boardgame;
-        }
         //Public Inquiry er en constructor der tager status, customerID og creationDate som parametre og opretter et Inquiry objekt.
 
-
-        public InquiryStatus Status { get; set; }
-        public DateTime CreationDate { get; set; }
-        public Boardgame Boardgame { get; set; }
-        public Customer Customer { get; set; }
+        public InquiryStatus Status { get; set; } = status;
+        public DateTime CreationDate { get; set; } = creationDate;
+        public Boardgame Boardgame { get; set; } = boardgame;
+        public Customer Customer { get; set; } = customer;
         //Status, CreationDate, Boardgame og Customer er properties der kan tilgås og ændres udefra.
 
         public enum InquiryStatus

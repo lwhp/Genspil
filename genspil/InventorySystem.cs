@@ -118,9 +118,9 @@ namespace genspil
             string customerID = Console.ReadLine() ?? "";
             Console.WriteLine("Enter Boardgame name: ");
             string boardgameName = Console.ReadLine() ?? "";
-            Boardgame boardgame = new Boardgame(boardgameName, "", 0, 0, Condition.New, 0, "");
-            Customer customer = new Customer(customerName, customerEmail, customerID);
-            Inquiry newInquiry = new Inquiry(Inquiry.InquiryStatus.Open, customer, DateTime.Now, boardgame);
+            Boardgame boardgame = new(boardgameName, "", 0, 0, Condition.New, 0, "");
+            Customer customer = new(customerName, customerEmail, customerID);
+            Inquiry newInquiry = new(Inquiry.InquiryStatus.Open, customer, DateTime.Now, boardgame);
             customer.Inquiries.Add(newInquiry);
         }
 
@@ -129,7 +129,7 @@ namespace genspil
         {
             Console.WriteLine("Enter customer ID: ");
             string customerID = Console.ReadLine() ?? "";
-            Customer customer = new Customer("","", customerID);
+            Customer customer = new("","", customerID);
             Inquiry inquiry = customer.Inquiries.Find(x => x.Customer.CustomerID == customerID);
             if (inquiry == null)
             {
@@ -138,9 +138,8 @@ namespace genspil
             }
             Console.WriteLine("Enter new status: ");
             Console.WriteLine("Enter new status (Open, InProgress, Closed, Resolved): ");
-            string newStatusInput = Console.ReadLine();
-            Inquiry.InquiryStatus newStatus;
-            if (Enum.TryParse(newStatusInput, true, out newStatus))
+            string newStatusInput = Console.ReadLine() ?? "";
+            if (Enum.TryParse(newStatusInput, true, out Inquiry.InquiryStatus newStatus))
             {
                 inquiry.Status = newStatus;
             }
