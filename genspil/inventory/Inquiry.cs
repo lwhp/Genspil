@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace genspil
+namespace genspil.inventory
 {
     internal class Inquiry(Inquiry.InquiryStatus status, Customer customer, DateTime creationDate, Boardgame boardgame)
     {

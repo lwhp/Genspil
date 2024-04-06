@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace genspil
+namespace genspil.inventory
 {
     // Vi bruger en static class til vores InventorySystem da vi ikke vil have at vi skal kunne lave flere instances af den samme klasse.
     public static class InventorySystem
@@ -85,7 +85,7 @@ namespace genspil
         }
 
         public static void SearchGame()
-        { 
+        {
             Console.WriteLine("Enter search term: ");
             string search = Console.ReadLine() ?? "";
             List<Boardgame> searchResults = Boardgames.FindAll(x => x.Name.Contains(search) || x.Genre.Contains(search) || x.BoardgameID.Contains(search));
@@ -129,7 +129,7 @@ namespace genspil
         {
             Console.WriteLine("Enter customer ID: ");
             string customerID = Console.ReadLine() ?? "";
-            Customer customer = new("","", customerID);
+            Customer customer = new("", "", customerID);
             Inquiry inquiry = customer.Inquiries.Find(x => x.Customer.CustomerID == customerID);
             if (inquiry == null)
             {
@@ -153,11 +153,14 @@ namespace genspil
         {
             foreach (Inquiry inquiry in Inquiries)
             {
-                Console.WriteLine($"Status: {inquiry.Status}");
-                Console.WriteLine($"Creation date: {inquiry.CreationDate}");
-                Console.WriteLine($"Customer: {inquiry.Customer.Name}");
-                Console.WriteLine($"Boardgame: {inquiry.Boardgame.Name}");
-                Console.WriteLine("______________________________");
+
+                Console.WriteLine("Status: {0} \n" +
+                    "Creation Date: {1} \n" +
+                    "Customer: {2} \n" +
+                    "Boardgame: {3} \n" +
+                    "______________________________",
+                    inquiry.Status, inquiry.CreationDate, inquiry.Customer.Name, inquiry.Boardgame.Name
+                );
             }
         }
 
@@ -177,7 +180,7 @@ namespace genspil
                     "--------------------------",
                     gameCount, boardgame.Name, boardgame.Genre, boardgame.MinPlayers, boardgame.MaxPlayers, boardgame.Conditions, boardgame.Price, boardgame.BoardgameID
                 );
-                
+
             }
         }
 

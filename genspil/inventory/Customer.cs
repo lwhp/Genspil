@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace genspil
+namespace genspil.inventory
 {
     internal class Customer
     {
@@ -20,6 +20,6 @@ namespace genspil
         public string Email { get; set; }
         public string CustomerID { get; set; }
         public List<Inquiry> Inquiries { get; set; }
-       
+
     }
 }

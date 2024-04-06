@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace genspil
+namespace genspil.inventory
 {
     internal class Boardgame(string name, string genre, int minPlayers, int maxPlayers, Condition conditions, float price, string boardgameID)
     {
@@ -18,7 +18,7 @@ namespace genspil
 
 
     }
-    public enum Condition 
+    public enum Condition
     {
         New,
         Used,

@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using genspil.inventory;
 
 namespace genspil
 {
