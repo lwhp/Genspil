@@ -15,12 +15,12 @@ namespace genspil
             Console.WriteLine("Enter min players: ");
             int minPlayers = Utilities.GetNumberFromInput();
 
-            Console.WriteLine("Enter max players:");
+            Console.WriteLine("Enter max players: ");
             int maxPlayers = Utilities.GetNumberFromInput();
             
             Console.WriteLine("Enter condition (New, Used, Damaged): ");
-            Condition condition;
-            if (!Enum.TryParse(Console.ReadLine() ?? "", true, out condition))
+
+            if (!Enum.TryParse(Console.ReadLine() ?? "", true, out Condition condition))
             {
                 Console.WriteLine("Invalid condition. Setting to 'New' as default.");
                 condition = Condition.New;
@@ -39,7 +39,7 @@ namespace genspil
         static void ConfirmExit()
         {
             Console.WriteLine("Are you sure you want to exit? (y/n)");
-            string exit = Console.ReadLine();
+            string exit = Console.ReadLine() ?? "";
             if (exit == "y")
             {
                 Environment.Exit(0);
