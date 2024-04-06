@@ -1,66 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace genspil
 {
-    internal class InventorySystem
+    // Vi bruger en static class til vores InventorySystem da vi ikke vil have at vi skal kunne lave flere instances af den samme klasse.
+    public static class InventorySystem
     {
-        public InventorySystem()
-        {
-            Boardgames = new List<Boardgame>(); 
-            Employees = new List<Employee>();
-        }
-        //Public InventorySystem er en constructor der opretter et InventorySystem objekt og initialiserer listen af boardgames.
-        public List<Boardgame> Boardgames { get; set; }
-        public List<Employee> Employees { get; set; }
-        public List<Inquiry> Inquiries { get; set; } = new List<Inquiry>();
+        private static List<Boardgame> Boardgames { get; set; } = [];
+        private static List<Employee> Employees { get; set; } = [];
+        private static List<Inquiry> Inquiries { get; set; } = [];
 
 
-        public void AddGame()
+        //AddGame metoden er en metode der tager et boardgame objekt som parameter og tilføjer det til listen af boardgames.
+        public static void AddGame(string name, string genre, int minPlayers, int maxPlayers, Condition condition, float price, string boardgameID)
         {
-           Console.WriteLine("Enter name:");
-            string name = Console.ReadLine();
-            Console.WriteLine("Enter genre:");
-            string genre = Console.ReadLine();
-            Console.WriteLine("Enter min players:");
-            if (!int.TryParse(Console.ReadLine(), out int minPlayers))
-            {
-                Console.WriteLine("Invalid input");
-                return;
-            }   
-            Console.WriteLine("Enter max players:");
-            if (!int.TryParse(Console.ReadLine(), out int maxPlayers))
-            {
-                Console.WriteLine("Invalid input");
-                return;
-            }
-            Console.WriteLine("Enter condition:");
-            Console.WriteLine("Enter condition (New, Used, Damaged): ");
-            string conditionInput = Console.ReadLine();
-            Condition condition;
-            if (!Enum.TryParse(conditionInput, true, out condition))
-            {
-                Console.WriteLine("Invalid condition. Setting to 'New' as default.");
-                condition = Condition.New;
-            }
-            Console.WriteLine("Enter price:");
-            if (!float.TryParse(Console.ReadLine(), out float price))
-            {
-                Console.WriteLine("Invalid input");
-                return;
-            }
-            Console.WriteLine("Enter boardgame ID:");
-            string boardgameID = Console.ReadLine();
             Boardgame boardgame = new Boardgame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
             Boardgames.Add(boardgame);
-            }
-        //AddGame metoden er en metode der tager et boardgame objekt som parameter og tilføjer det til listen af boardgames.
+        }
 
-        public void UpdateGame()
+        public static void UpdateGame()
         {
             Console.WriteLine("Enter boardgame ID: ");
             string updateID = Console.ReadLine();
@@ -103,7 +67,7 @@ namespace genspil
             updateGame.Price = float.Parse(Console.ReadLine());
         }
         //UpdateGame metoden er en metode der tager et boardgame objekt som parameter og opdaterer det i listen af boardgames.
-        public void DeleteGame()
+        public static void DeleteGame()
         {
             Console.WriteLine("Enter boardgame ID: ");
             string deleteID = Console.ReadLine();
@@ -117,7 +81,7 @@ namespace genspil
 
         }
 
-        public void SearchGame()
+        public static void SearchGame()
         { 
             Console.WriteLine("Enter search term: ");
             string search = Console.ReadLine();
@@ -140,7 +104,7 @@ namespace genspil
 
         }
         //SearchGame metoden er en metode der tager et boardgame objekt som parameter og søger efter det i listen af boardgames.
-        public void RegisterInquiry()
+        public static void RegisterInquiry()
         {
             Console.WriteLine("Enter customer name: ");
             string customerName = Console.ReadLine();
@@ -156,7 +120,7 @@ namespace genspil
             customer.Inquiries.Add(newInquiry);
         }
         //RegisterInquiry metoden er en metode der tager et inquiry objekt som parameter og tilføjer det til customerens liste af inquiries.
-        public void UpdateInquiry()
+        public static void UpdateInquiry()
         {
             Console.WriteLine("Enter customer ID: ");
             string customerID = Console.ReadLine();
@@ -180,7 +144,7 @@ namespace genspil
                 Console.WriteLine("Invalid status. Please enter a valid status (Open, InProgress, Closed, Resolved).");
             }
         }
-        public void PrintInquiries()
+        public static void PrintInquiries()
         {
             foreach (Inquiry inquiry in Inquiries)
             {
@@ -192,7 +156,7 @@ namespace genspil
             }
         }
         //PrintInquiries metoden er en metode der printer alle inquiries i listen af inquiries.
-        public void PrintInventoryList()
+        public static void PrintInventoryList()
         {
             int gameCount = 1;
             foreach (Boardgame boardgame in Boardgames)
