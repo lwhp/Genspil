@@ -27,7 +27,7 @@ namespace genspil
             Console.Clear();
 
             Console.WriteLine("\nSelect Condition");
-            Condition condition = (Condition)Enum.Parse(typeof(Condition), Utilities.SelectEnumString("condition"));
+            Condition condition = Enum.Parse<Condition>(Utilities.SelectEnumString("condition"));
 
             Console.Clear();
 
@@ -93,8 +93,8 @@ namespace genspil
                     InventorySystem.ChangeGame(boardID, null, null, null, Console.ReadLine() ?? "");
                     break;
                 case "5":
-                    Console.Write("Enter new condition: ");
-                    InventorySystem.ChangeGame(boardID, null, null, null, null, (Condition)Enum.Parse(typeof(Condition), Utilities.SelectEnumString("condition")));
+                    Console.Write("Select Condition");
+                    InventorySystem.ChangeGame(boardID, null, null, null, null, Enum.Parse<Condition>(Utilities.SelectEnumString("condition")));
                     break;
             }
 
