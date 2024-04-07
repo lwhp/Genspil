@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using genspil.Database;
 using genspil.Enums;
 
 namespace genspil.inventory
@@ -27,10 +28,12 @@ namespace genspil.inventory
         private static Boardgame GetBoardGame(string id) => _BoardGames.Find(x => x.BoardGameId == id) ?? null;
 
         //AddGame metoden er en metode der tager et boardgame objekt som parameter og tilføjer det til listen af boardgames.
-        public static void AddGame(string name, string genre, int minPlayers, int maxPlayers, Condition condition, float price, string boardgameID)
+        internal static void AddGame(string name, string genre, int minPlayers, int maxPlayers, Condition condition, float price, string boardgameID)
         {
+            
             Boardgame boardgame = new(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
             _BoardGames.Add(boardgame);
+            
         }
 
         public static void ChangeGame(string id, int? min = null, int? max = null, string? genre = null, string? name = null, Condition? newCondition = null)
@@ -49,8 +52,12 @@ namespace genspil.inventory
         //UpdateGame metoden er en metode der tager et boardgame objekt som parameter og opdaterer det i listen af boardgames.
         public static void DeleteGame()
         {
+            DataHandler dataHandler = new DataHandler("BoardGames.txt");
             Console.WriteLine("Enter boardgame ID: ");
-            Boardgame deleteGame = GetBoardGame(Console.ReadLine() ?? "");
+            string boardgameID = Console.ReadLine() ?? "";
+            dataHandler.DeleteBoardGame(boardgameID);
+
+            Boardgame deleteGame = GetBoardGame(boardgameID);
             if (deleteGame == null)
             {
                 Console.WriteLine("Game not found.");
@@ -58,6 +65,8 @@ namespace genspil.inventory
             }
 
             _BoardGames.Remove(deleteGame);
+            Console.WriteLine("Game deleted.");
+
         }
 
         public static void SearchGame()
@@ -132,6 +141,9 @@ namespace genspil.inventory
                 boardgame.PrintBoardGame();
             }
         }
+
+        //internal static void AddGame(Boardgame boardgame) => throw new NotImplementedException();
+
 
         //PrintInventoryList metoden er en metode der printer alle boardgames i listen af boardgames.
     }

@@ -2,11 +2,15 @@
 using System.Xml.Linq;
 using genspil.inventory;
 using genspil.Enums;
+using genspil.Database;
+using System.IO;
 
 namespace genspil
 {
     internal class Program
     {
+        private static DataHandler dataHandler = new DataHandler("BoardGames.txt");
+        
         static void AddGame()
         {
             Console.Clear();
@@ -39,6 +43,7 @@ namespace genspil
             string boardgameID = Console.ReadLine() ?? "";
 
             InventorySystem.AddGame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
+            dataHandler.SaveBoardGame(new Boardgame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID));
         }
 
 
@@ -108,6 +113,7 @@ namespace genspil
 
         static void Main()
         {
+            var boardgames = dataHandler.LoadBoardgames();
             while (true)
             {
                 Console.Clear();
