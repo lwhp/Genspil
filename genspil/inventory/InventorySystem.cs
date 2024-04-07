@@ -54,15 +54,14 @@ namespace genspil.inventory
         public static void DeleteGame()
         {
             Console.WriteLine("Enter boardgame ID: ");
-            string deleteID = Console.ReadLine() ?? "";
-            Boardgame deleteGame = GetBoardGame(deleteID);
+            Boardgame deleteGame = GetBoardGame(Console.ReadLine() ?? "");
             if (deleteGame == null)
             {
                 Console.WriteLine("Game not found.");
                 return;
             }
-            Boardgames.Remove(deleteGame);
 
+            Boardgames.Remove(deleteGame);
         }
 
         public static void SearchGame()
@@ -78,13 +77,14 @@ namespace genspil.inventory
 
             foreach (Boardgame boardgame in searchResults)
             {
-                Console.WriteLine($"Name: {boardgame.Name}");
-                Console.WriteLine($"Genre: {boardgame.Genre}");
-                Console.WriteLine($"Players: {boardgame.MinPlayers} - {boardgame.MaxPlayers}");
-                Console.WriteLine($"Condition: {boardgame.Conditions}");
-                Console.WriteLine($"Price: {boardgame.Price}");
-                Console.WriteLine($"Boardgame ID: {boardgame.BoardgameID}");
-                Console.WriteLine("______________________________");
+                Console.WriteLine("Name: {0} \n" +
+                "Genre: {1} \n" +
+                "Players: {2} - {3} \n" +
+                "Condition: {4} \n" +
+                "Price: {5} \n" +
+                "Boardgame ID: {6} \n" +
+                "--------------------------",
+                boardgame.Name, boardgame.Genre, boardgame.MinPlayers, boardgame.MaxPlayers, boardgame.Conditions, boardgame.Price, boardgame.BoardgameID);
             }
         }
 
