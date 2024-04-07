@@ -24,7 +24,7 @@ namespace genspil.inventory
             return boardgame != null;
         }
 
-        private static Boardgame GetBoardGame(string id) => _BoardGames.Find(x => x.BoardgameID == id) ?? null;
+        private static Boardgame GetBoardGame(string id) => _BoardGames.Find(x => x.BoardGameId == id) ?? null;
 
         //AddGame metoden er en metode der tager et boardgame objekt som parameter og tilføjer det til listen af boardgames.
         public static void AddGame(string name, string genre, int minPlayers, int maxPlayers, Condition condition, float price, string boardgameID)
@@ -43,11 +43,7 @@ namespace genspil.inventory
                 return;
             }
 
-            board.MinPlayers = min ?? board.MinPlayers;
-            board.MaxPlayers = max ?? board.MaxPlayers;
-            board.Genre = genre ?? board.Genre;
-            board.Name = name ?? board.Name;
-            board.Conditions = newCondition ?? board.Conditions;
+            board.ChangeBoardSettings(min, max, genre, name, newCondition);
         }
 
         //UpdateGame metoden er en metode der tager et boardgame objekt som parameter og opdaterer det i listen af boardgames.
@@ -68,7 +64,7 @@ namespace genspil.inventory
         {
             Console.WriteLine("Enter search term: ");
             string search = Console.ReadLine() ?? "";
-            List<Boardgame> searchResults = _BoardGames.FindAll(x => x.Name.Contains(search) || x.Genre.Contains(search) || x.BoardgameID.Contains(search));
+            List<Boardgame> searchResults = _BoardGames.FindAll(x => x.Name.Contains(search) || x.Genre.Contains(search) || x.BoardGameId.Contains(search));
             if (searchResults.Count == 0)
             {
                 Console.WriteLine("No results found.");
@@ -77,14 +73,7 @@ namespace genspil.inventory
 
             foreach (Boardgame boardgame in searchResults)
             {
-                Console.WriteLine("Name: {0} \n" +
-                "Genre: {1} \n" +
-                "Players: {2} - {3} \n" +
-                "Condition: {4} \n" +
-                "Price: {5} \n" +
-                "Boardgame ID: {6} \n" +
-                "--------------------------",
-                boardgame.Name, boardgame.Genre, boardgame.MinPlayers, boardgame.MaxPlayers, boardgame.Conditions, boardgame.Price, boardgame.BoardgameID);
+                boardgame.PrintBoardGame();
             }
         }
 
@@ -151,17 +140,8 @@ namespace genspil.inventory
             int gameCount = 1;
             foreach (Boardgame boardgame in _BoardGames)
             {
-                Console.WriteLine("Game: {0} \n" +
-                    "Name: {1} \n" +
-                    "Genre: {2} \n" +
-                    "Players: {3} - {4} \n" +
-                    "Condition: {5} \n" +
-                    "Price: {6} \n" +
-                    "Boardgame ID: {7} \n" +
-                    "--------------------------",
-                    gameCount, boardgame.Name, boardgame.Genre, boardgame.MinPlayers, boardgame.MaxPlayers, boardgame.Conditions, boardgame.Price, boardgame.BoardgameID
-                );
-
+                Console.WriteLine($"Game: {gameCount}");
+                boardgame.PrintBoardGame();
             }
         }
 
