@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using genspil.inventory;
+using genspil.Enums;
 
 namespace genspil
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using genspil.Enums;
 using System.Threading.Tasks;
 
 namespace genspil.inventory
@@ -33,11 +34,5 @@ namespace genspil.inventory
                 name, genre, minPlayers, maxPlayers, conditions, price, boardgameID);
         }
 
-    }
-    public enum Condition
-    {
-        New,
-        Used,
-        Damaged
     }
 }
