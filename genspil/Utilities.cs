@@ -23,7 +23,7 @@ namespace genspil
 
         public static string SelectEnumString(string enumType)
         {
-            Type enumTypeObject = enumType == "condition" ? typeof(Condition) : enumType == "genre" ? typeof(Genre) : typeof(SubGenre);
+            Type enumTypeObject = enumType == "condition" ? typeof(Condition) : enumType == "genre" ? typeof(Genre) : enumType == "inquiry" ? typeof(InquiryStatus) : typeof(SubGenre);
 
             int number = 0;
             List<string> enumNames = [];

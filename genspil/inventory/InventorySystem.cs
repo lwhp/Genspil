@@ -14,7 +14,6 @@ namespace genspil.inventory
     public static class InventorySystem
     {
         private static List<Boardgame> _BoardGames = [];
-        private static List<Employee> _Employees = [];
         private static List<Inquiry> _Inquiries = [];
 
 
@@ -89,55 +88,43 @@ namespace genspil.inventory
             string customerID = Console.ReadLine() ?? "";
             Console.WriteLine("Enter Boardgame name: ");
             string boardgameName = Console.ReadLine() ?? "";
-            Boardgame boardgame = new(boardgameName, "", 0, 0, Condition.New, 0, "");
-            Customer customer = new(customerName, customerEmail, customerID);
-            Inquiry newInquiry = new(Inquiry.InquiryStatus.Open, customer, DateTime.Now, boardgame);
-            customer.Inquiries.Add(newInquiry);
+
+            Inquiry newInquiry = new(InquiryStatus.Open, boardgameName, customerName, customerEmail, customerID);
+
+            _Inquiries.Add(newInquiry);
         }
 
         //RegisterInquiry metoden er en metode der tager et inquiry objekt som parameter og tilføjer det til customerens liste af inquiries.
         public static void UpdateInquiry()
         {
-            Console.WriteLine("Enter customer ID: ");
+            Console.WriteLine("Enter customer email: ");
             string customerID = Console.ReadLine() ?? "";
-            Customer customer = new("", "", customerID);
-            Inquiry inquiry = customer.Inquiries.Find(x => x.Customer.CustomerID == customerID);
+            Inquiry inquiry = _Inquiries.Find(x => x.Email == customerID);
+
             if (inquiry == null)
             {
                 Console.WriteLine("Inquiry not found.");
                 return;
             }
-            Console.WriteLine("Enter new status: ");
-            Console.WriteLine("Enter new status (Open, InProgress, Closed, Resolved): ");
-            string newStatusInput = Console.ReadLine() ?? "";
-            if (Enum.TryParse(newStatusInput, true, out Inquiry.InquiryStatus newStatus))
-            {
-                inquiry.Status = newStatus;
-            }
-            else
-            {
-                Console.WriteLine("Invalid status. Please enter a valid status (Open, InProgress, Closed, Resolved).");
-            }
+
+
+            Console.WriteLine("Update inquiry status");
+
+            InquiryStatus newStatus = Enum.Parse<InquiryStatus>(Utilities.SelectEnumString("inquiry"));
         }
 
         public static void PrintInquiries()
         {
             foreach (Inquiry inquiry in _Inquiries)
             {
-
-                Console.WriteLine("Status: {0} \n" +
-                    "Creation Date: {1} \n" +
-                    "Customer: {2} \n" +
-                    "Boardgame: {3} \n" +
-                    "______________________________",
-                    inquiry.Status, inquiry.CreationDate, inquiry.Customer.Name, inquiry.Boardgame.Name
-                );
+                inquiry.PrintInquiry();
             }
         }
 
         //PrintInquiries metoden er en metode der printer alle inquiries i listen af inquiries.
         public static void PrintInventoryList()
         {
+            Console.Clear();
             int gameCount = 1;
             foreach (Boardgame boardgame in _BoardGames)
             {

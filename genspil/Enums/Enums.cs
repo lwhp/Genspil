@@ -30,6 +30,13 @@ namespace genspil.Enums
         WorkerPlacement,
     }
 
+    public enum InquiryStatus
+    {
+        Open,
+        InProgress,
+        Closed,
+        Resolved
+    }
     public enum SubGenre
     {
         AuctionBidding,

@@ -4,26 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using genspil.Enums;
+
 namespace genspil.inventory
 {
-    internal class Inquiry(Inquiry.InquiryStatus status, Customer customer, DateTime creationDate, Boardgame boardgame)
+    internal class Inquiry(InquiryStatus status, string boardgameName, string customerName, string customerEmail, string customerID, DateTime? creationDate = null)
     {
-        //Public Inquiry er en constructor der tager status, customerID og creationDate som parametre og opretter et Inquiry objekt.
-
         public InquiryStatus Status { get; set; } = status;
-        public DateTime CreationDate { get; set; } = creationDate;
-        public Boardgame Boardgame { get; set; } = boardgame;
-        public Customer Customer { get; set; } = customer;
-        //Status, CreationDate, Boardgame og Customer er properties der kan tilgås og ændres udefra.
+        public DateTime CreationDate { get; } = creationDate ?? DateTime.Now;
 
-        public enum InquiryStatus
+        public string Email { get; } = customerEmail;
+
+        public void PrintInquiry()
         {
-            Open,
-            InProgress,
-            Closed,
-            Resolved
+            Console.WriteLine("Status: {0} \n" +
+                "Creation Date: {1} \n" +
+                "Customer: {2} \n" +
+                "Boardgame: {3} \n" +
+                "______________________________",
+                status, CreationDate, customerName, boardgameName
+            );
         }
-        //InquiryStatus er en enum der indeholder de forskellige statusser et inquiry objekt kan have. Enum er en datatype der kan have en af en række foruddefinerede værdier.
 
+        public void UpdateInquiryStatus(InquiryStatus newStatus)
+        {
+            status = newStatus;
+        }
     }
 }
