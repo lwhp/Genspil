@@ -12,9 +12,9 @@ namespace genspil.inventory
     // Vi bruger en static class til vores InventorySystem da vi ikke vil have at vi skal kunne lave flere instances af den samme klasse.
     public static class InventorySystem
     {
-        private static List<Boardgame> Boardgames { get; set; } = [];
-        private static List<Employee> Employees { get; set; } = [];
-        private static List<Inquiry> Inquiries { get; set; } = [];
+        private static List<Boardgame> _BoardGames = [];
+        private static List<Employee> _Employees = [];
+        private static List<Inquiry> _Inquiries = [];
 
 
         public static bool DoesGameExsist(string id)
@@ -24,13 +24,13 @@ namespace genspil.inventory
             return boardgame != null;
         }
 
-        private static Boardgame GetBoardGame(string id) => Boardgames.Find(x => x.BoardgameID == id) ?? null;
+        private static Boardgame GetBoardGame(string id) => _BoardGames.Find(x => x.BoardgameID == id) ?? null;
 
         //AddGame metoden er en metode der tager et boardgame objekt som parameter og tilføjer det til listen af boardgames.
         public static void AddGame(string name, string genre, int minPlayers, int maxPlayers, Condition condition, float price, string boardgameID)
         {
             Boardgame boardgame = new(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
-            Boardgames.Add(boardgame);
+            _BoardGames.Add(boardgame);
         }
 
         public static void ChangeGame(string id, int? min = null, int? max = null, string? genre = null, string? name = null, Condition? newCondition = null)
@@ -61,14 +61,14 @@ namespace genspil.inventory
                 return;
             }
 
-            Boardgames.Remove(deleteGame);
+            _BoardGames.Remove(deleteGame);
         }
 
         public static void SearchGame()
         {
             Console.WriteLine("Enter search term: ");
             string search = Console.ReadLine() ?? "";
-            List<Boardgame> searchResults = Boardgames.FindAll(x => x.Name.Contains(search) || x.Genre.Contains(search) || x.BoardgameID.Contains(search));
+            List<Boardgame> searchResults = _BoardGames.FindAll(x => x.Name.Contains(search) || x.Genre.Contains(search) || x.BoardgameID.Contains(search));
             if (searchResults.Count == 0)
             {
                 Console.WriteLine("No results found.");
@@ -132,7 +132,7 @@ namespace genspil.inventory
 
         public static void PrintInquiries()
         {
-            foreach (Inquiry inquiry in Inquiries)
+            foreach (Inquiry inquiry in _Inquiries)
             {
 
                 Console.WriteLine("Status: {0} \n" +
@@ -149,7 +149,7 @@ namespace genspil.inventory
         public static void PrintInventoryList()
         {
             int gameCount = 1;
-            foreach (Boardgame boardgame in Boardgames)
+            foreach (Boardgame boardgame in _BoardGames)
             {
                 Console.WriteLine("Game: {0} \n" +
                     "Name: {1} \n" +
