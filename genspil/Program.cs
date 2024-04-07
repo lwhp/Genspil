@@ -9,27 +9,33 @@ namespace genspil
     {
         static void AddGame()
         {
-            Console.WriteLine("Enter name: ");
+            Console.Clear();
+            Console.Write("Enter name: ");
             string name = Console.ReadLine() ?? "";
 
-            Console.WriteLine("Enter genre: ");
-            string genre = Console.ReadLine() ?? "";
+            Console.Clear();
 
-            Console.WriteLine("Enter min players: ");
+            Console.WriteLine("\nSelect Genre");
+            string genre = Utilities.SelectEnumString("genre");
+
+            Console.Write("\nEnter min players: ");
             int minPlayers = Utilities.GetNumberFromInput();
 
-            Console.WriteLine("Enter max players: ");
+            Console.Write("\nEnter max players: ");
             int maxPlayers = Utilities.GetNumberFromInput();
-            
-            Console.WriteLine("Enter condition (New, Used, Damaged): ");
 
-            Condition condition = Utilities.GetConditionFromInput();
+            Console.Clear();
 
-            Console.WriteLine("Enter price: ");
+            Console.WriteLine("\nSelect Condition");
+            Condition condition = (Condition)Enum.Parse(typeof(Condition), Utilities.SelectEnumString("condition"));
+
+            Console.Clear();
+
+            Console.Write("\nEnter price: ");
 
             float price = Utilities.GetFloatFromInput();
 
-            Console.WriteLine("Enter boardgame ID: ");
+            Console.Write("\nEnter boardgame ID: ");
             string boardgameID = Console.ReadLine() ?? "";
 
             InventorySystem.AddGame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
@@ -88,7 +94,7 @@ namespace genspil
                     break;
                 case "5":
                     Console.Write("Enter new condition: ");
-                    InventorySystem.ChangeGame(boardID, null, null, null, null, Utilities.GetConditionFromInput());
+                    InventorySystem.ChangeGame(boardID, null, null, null, null, (Condition)Enum.Parse(typeof(Condition), Utilities.SelectEnumString("condition")));
                     break;
             }
 

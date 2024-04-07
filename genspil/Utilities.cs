@@ -21,6 +21,32 @@ namespace genspil
             return number;
         }
 
+        public static string SelectEnumString(string enumType)
+        {
+            Type enumTypeObject = enumType == "condition" ? typeof(Condition) : enumType == "genre" ? typeof(Genre) : typeof(SubGenre);
+
+            int number = 0;
+            List<string> enumNames = [];
+
+            foreach (string name in Enum.GetNames(enumTypeObject))
+            {
+                number++;
+                Console.WriteLine($"{number}. {name}");
+                enumNames.Add(name);
+            }
+
+            int input = GetNumberFromInput();
+
+            Console.Clear();
+
+            if (input > 0 && input <= number)
+            {
+                return enumNames[input - 1];
+            }
+
+            return SelectEnumString(enumType);
+        }
+
         public static float GetFloatFromInput()
         {
             if (!float.TryParse(Console.ReadLine(), out float number))
@@ -30,18 +56,6 @@ namespace genspil
             }
 
             return number;
-        }
-
-        public static Condition GetConditionFromInput()
-        {
-            if (!Enum.TryParse(Console.ReadLine() ?? "", true, out Condition condition))
-            {
-                Console.WriteLine("Invalid Condition!");
-
-                return GetConditionFromInput();
-            }
-
-            return condition;
         }
     }
 }

@@ -40,6 +40,7 @@ namespace genspil.Enums
         DexterityGame,
         TriviaGame,
         RealtimeStrategy,
-        Wargame
+        Wargame,
+        None
     }
 }
