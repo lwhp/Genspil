@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using genspil.inventory;
 
 namespace genspil
@@ -21,11 +22,7 @@ namespace genspil
             
             Console.WriteLine("Enter condition (New, Used, Damaged): ");
 
-            if (!Enum.TryParse(Console.ReadLine() ?? "", true, out Condition condition))
-            {
-                Console.WriteLine("Invalid condition. Setting to 'New' as default.");
-                condition = Condition.New;
-            }
+            Condition condition = Utilities.GetConditionFromInput();
 
             Console.WriteLine("Enter price: ");
 
@@ -44,6 +41,59 @@ namespace genspil
             if (exit == "y")
             {
                 Environment.Exit(0);
+            }
+        }
+
+        static void UpdateGame(string? boardID = null)
+        {
+            Console.Clear();
+
+            if (boardID == null)
+            {
+                Console.WriteLine("Enter Board ID: ");
+                boardID = Console.ReadLine() ?? "";
+                if (!InventorySystem.DoesGameExsist(boardID))
+                {
+                    Console.WriteLine($"{boardID} does not exist");
+                    return;
+                }
+            }
+
+            Console.WriteLine("1. Change Minimum Players \n" + 
+                "2. Change Maximum Players \n" +
+                "3. Change Genre \n" +
+                "4. Change Name \n" + 
+                "5. Change Condition");
+
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    Console.Write("Enter new number of minimum players: ");
+                    InventorySystem.ChangeGame(boardID, Utilities.GetNumberFromInput());
+                    break;
+                case "2":
+                    Console.Write("Enter new number of maximum players: ");
+                    InventorySystem.ChangeGame(boardID, null, Utilities.GetNumberFromInput());
+                    break;
+                case "3":
+                    Console.Write("Enter new genre: ");
+                    InventorySystem.ChangeGame(boardID, null, null, Console.ReadLine() ?? "");
+                    break;
+                case "4":
+                    Console.Write("Enter new game name: ");
+                    InventorySystem.ChangeGame(boardID, null, null, null, Console.ReadLine() ?? "");
+                    break;
+                case "5":
+                    Console.Write("Enter new condition: ");
+                    InventorySystem.ChangeGame(boardID, null, null, null, null, Utilities.GetConditionFromInput());
+                    break;
+            }
+
+            Console.Write("\nDo you wish to change more? (Y/N): ");
+
+            if (Console.ReadLine() == "y")
+            {
+                UpdateGame(boardID);
             }
         }
 
@@ -67,38 +117,36 @@ namespace genspil
                     "Choose an option: "
                 );
 
-            string option = Console.ReadLine() ?? "";
-
-                switch (option)
-                {
-                    case "1":
-                        AddGame();
-                        break;
-                    case "2":
-                        InventorySystem.UpdateGame();
-                        break;
-                    case "3":
-                        InventorySystem.DeleteGame();
-                        break;
-                    case "4":
-                        InventorySystem.SearchGame();
-                        break;
-                    case "5":
-                        InventorySystem.RegisterInquiry();
-                        break;
-                    case "6":
-                        InventorySystem.UpdateInquiry();
-                        break;
-                    case "7":
-                        InventorySystem.PrintInventoryList();
-                        break;
-                    case "8":
-                        InventorySystem.PrintInquiries();
-                        break;
-                    case "9":
-                        ConfirmExit();
-                        break;
-                }
+            switch (Console.ReadLine() ?? "")
+            {
+                case "1":
+                    AddGame();
+                    break;
+                case "2":
+                    UpdateGame();
+                    break;
+                case "3":
+                    InventorySystem.DeleteGame();
+                    break;
+                case "4":
+                    InventorySystem.SearchGame();
+                    break;
+                case "5":
+                    InventorySystem.RegisterInquiry();
+                    break;
+                case "6":
+                    InventorySystem.UpdateInquiry();
+                    break;
+                case "7":
+                    InventorySystem.PrintInventoryList();
+                    break;
+                case "8":
+                    InventorySystem.PrintInquiries();
+                    break;
+                case "9":
+                    ConfirmExit();
+                    break;
+               }
 
                 Console.WriteLine("press any key to go back to main menu");
                 Console.ReadKey();

@@ -33,42 +33,28 @@ namespace genspil.inventory
             Boardgames.Add(boardgame);
         }
 
-        public static void UpdateGame()
+        public static void ChangeGame(string id, int? min = null, int? max = null, string? genre = null, string? name = null, Condition? newCondition = null)
         {
-            Console.WriteLine("Enter boardgame ID: ");
-            Boardgame updateGame = GetBoardGame(Console.ReadLine() ?? "");
-            if (updateGame == null)
+            Boardgame board = GetBoardGame(id);
+
+            if (board == null)
             {
-                Console.WriteLine("Game not found.");
+                Console.WriteLine("Board not found...");
                 return;
             }
 
-            Console.WriteLine("Enter new name: ");
-            updateGame.Name = Console.ReadLine() ?? "";
-
-            Console.WriteLine("Enter new genre: ");
-            updateGame.Genre = Console.ReadLine() ?? "";
-
-            Console.WriteLine("Enter new min players: ");
-            int minPlayers = Utilities.GetNumberFromInput();
-
-            Console.WriteLine("Enter max players: ");
-            int maxPlayers = Utilities.GetNumberFromInput();
-
-            Console.WriteLine("Enter new condition (New, Used, Damaged): ");
-            if (Enum.TryParse(Console.ReadLine(), true, out Condition newCondition))
-            {
-                updateGame.Conditions = newCondition;
-            }
-            else
-            {
-                Console.WriteLine("Invalid condition. Please enter a valid condition (New, Used, Damaged).");
-
-            }
-
-            Console.WriteLine("Enter new price: ");
-            updateGame.Price = Utilities.GetFloatFromInput();
+            if (min != null)
+                board.MinPlayers = (int)min;
+            else if (max != null)
+                board.MaxPlayers = (int)max;
+            else if (genre != null)
+                board.Genre = genre;
+            else if (name != null)
+                board.Name = name;
+            else if (newCondition != null)
+                board.Conditions = (Condition)newCondition;
         }
+
         //UpdateGame metoden er en metode der tager et boardgame objekt som parameter og opdaterer det i listen af boardgames.
         public static void DeleteGame()
         {

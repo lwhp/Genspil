@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using genspil.inventory;
 
 namespace genspil
 {
@@ -28,6 +29,18 @@ namespace genspil
             }
 
             return number;
+        }
+
+        public static Condition GetConditionFromInput()
+        {
+            if (!Enum.TryParse(Console.ReadLine() ?? "", true, out Condition condition))
+            {
+                Console.WriteLine("Invalid Condition!");
+
+                return GetConditionFromInput();
+            }
+
+            return condition;
         }
     }
 }
