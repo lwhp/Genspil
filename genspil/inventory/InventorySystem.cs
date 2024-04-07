@@ -43,16 +43,11 @@ namespace genspil.inventory
                 return;
             }
 
-            if (min != null)
-                board.MinPlayers = (int)min;
-            else if (max != null)
-                board.MaxPlayers = (int)max;
-            else if (genre != null)
-                board.Genre = genre;
-            else if (name != null)
-                board.Name = name;
-            else if (newCondition != null)
-                board.Conditions = (Condition)newCondition;
+            board.MinPlayers = min ?? board.MinPlayers;
+            board.MaxPlayers = max ?? board.MaxPlayers;
+            board.Genre = genre ?? board.Genre;
+            board.Name = name ?? board.Name;
+            board.Conditions = newCondition ?? board.Conditions;
         }
 
         //UpdateGame metoden er en metode der tager et boardgame objekt som parameter og opdaterer det i listen af boardgames.

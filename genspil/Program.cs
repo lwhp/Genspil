@@ -34,6 +34,8 @@ namespace genspil
             InventorySystem.AddGame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
         }
 
+
+
         static void ConfirmExit()
         {
             Console.WriteLine("Are you sure you want to exit? (y/n)");
