@@ -8,7 +8,7 @@ using genspil.Enums;
 
 namespace genspil.inventory
 {
-    internal class Inquiry(InquiryStatus status, string boardgameName, string customerName, string customerEmail, string customerID, DateTime? creationDate = null)
+    public class Inquiry(InquiryStatus status, string boardgameName, string customerName, string customerEmail, string customerID, DateTime? creationDate = null)
     {
         public InquiryStatus Status { get; set; } = status;
         public DateTime CreationDate { get; } = creationDate ?? DateTime.Now;

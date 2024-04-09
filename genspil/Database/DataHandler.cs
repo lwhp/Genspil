@@ -77,5 +77,29 @@ namespace genspil.Database
                 }
             }
         }
+
+        public List<Inquiry> LoadInquiries()
+        {
+            List<Inquiry> inquiries = new List<Inquiry>();
+            using (StreamReader reader = new StreamReader(DataFileName))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+
+                    InquiryStatus status = (InquiryStatus)Enum.Parse(typeof(InquiryStatus), parts[0]);
+                    string boardgameName = parts[1];
+                    string customerName = parts[2];
+                    string customerEmail = parts[3];
+                    string customerID = parts[4];
+                    DateTime creationDate = DateTime.Parse(parts[5]);
+
+                    Inquiry inquiry = new Inquiry(status, boardgameName, customerName, customerEmail, customerID, creationDate);
+                    inquiries.Add(inquiry);
+                }
+            }
+            return inquiries;
+        }
     }    
 }

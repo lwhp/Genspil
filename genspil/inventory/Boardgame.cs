@@ -40,10 +40,8 @@ namespace genspil.inventory
                 name, genre, minPlayers, maxPlayers, conditions, price, boardgameID);
         }
 
-        public string MakeTitle()
-        {
-            return $"{name},{genre},{minPlayers},{maxPlayers},{conditions},{price},{boardgameID}";
-        }
+        public string MakeTitle() => $"{name},{genre},{minPlayers},{maxPlayers},{conditions},{price},{boardgameID}";
+        
 
 
     }

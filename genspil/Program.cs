@@ -10,6 +10,7 @@ namespace genspil
     internal class Program
     {
         private static DataHandler dataHandler = new DataHandler("BoardGames.txt");
+        private static DataHandler dataHandlerInquiries = new DataHandler("Inquiries.txt");
         
         static void AddGame()
         {
@@ -114,6 +115,7 @@ namespace genspil
         static void Main()
         {
             var boardgames = dataHandler.LoadBoardgames();
+            var inquiries = dataHandlerInquiries.LoadInquiries();
             while (true)
             {
                 Console.Clear();
