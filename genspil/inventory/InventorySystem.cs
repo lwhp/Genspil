@@ -1,44 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using genspil.Database;
+﻿using genspil.Database;
 using genspil.Enums;
 
 namespace genspil.inventory
 {
-    // Vi bruger en static class til vores InventorySystem da vi ikke vil have at vi skal kunne lave flere instances af den samme klasse.
     public static class InventorySystem
     {
-        private static List<Boardgame> _BoardGames = [];
-        private static List<Inquiry> _Inquiries = [];
-
-
-        public static bool DoesGameExsist(string id)
-        {
-            Boardgame boardgame = GetBoardGame(id);
-
-            return boardgame != null;
-        }
-
-        private static Boardgame GetBoardGame(string id) => _BoardGames.Find(x => x.BoardGameId == id) ?? null;
-
         //AddGame metoden er en metode der tager et boardgame objekt som parameter og tilføjer det til listen af boardgames.
         internal static void AddGame(string name, string genre, int minPlayers, int maxPlayers, Condition condition, float price, string boardgameID)
         {
             
             Boardgame boardgame = new(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
-            _BoardGames.Add(boardgame);
-            
+            Controller.AddGame(boardgame);            
         }
 
         public static void ChangeGame(string id, int? min = null, int? max = null, string? genre = null, string? name = null, Condition? newCondition = null)
         {
-            Boardgame board = GetBoardGame(id);
+            Boardgame board = Controller.GetBoardGame(id);
 
             if (board == null)
             {
@@ -52,28 +29,25 @@ namespace genspil.inventory
         //UpdateGame metoden er en metode der tager et boardgame objekt som parameter og opdaterer det i listen af boardgames.
         public static void DeleteGame()
         {
-            DataHandler dataHandler = new DataHandler("BoardGames.txt");
             Console.WriteLine("Enter boardgame ID: ");
             string boardgameID = Console.ReadLine() ?? "";
-            dataHandler.DeleteBoardGame(boardgameID);
 
-            Boardgame deleteGame = GetBoardGame(boardgameID);
-            if (deleteGame == null)
+            if (!Controller.DoesGameExsist(boardgameID))
             {
                 Console.WriteLine("Game not found.");
                 return;
             }
 
-            _BoardGames.Remove(deleteGame);
-            Console.WriteLine("Game deleted.");
-
+            DataHandler dataHandler = new DataHandler("BoardGames.txt");
+            dataHandler.DeleteBoardGame(boardgameID);
+            Controller.DeleteGame(boardgameID);
         }
 
         public static void SearchGame()
         {
             Console.WriteLine("Enter search term: ");
-            string search = Console.ReadLine() ?? "";
-            List<Boardgame> searchResults = _BoardGames.FindAll(x => x.Name.Contains(search) || x.Genre.Contains(search) || x.BoardGameId.Contains(search));
+            List<Boardgame> searchResults = Controller.GetSearchedGames(Console.ReadLine() ?? "");
+
             if (searchResults.Count == 0)
             {
                 Console.WriteLine("No results found.");
@@ -82,7 +56,8 @@ namespace genspil.inventory
 
             foreach (Boardgame boardgame in searchResults)
             {
-                boardgame.PrintBoardGame();
+                Console.WriteLine(boardgame.ToString());
+                Console.WriteLine("---------------------");
             }
         }
 
@@ -99,16 +74,14 @@ namespace genspil.inventory
             string boardgameName = Console.ReadLine() ?? "";
 
             Inquiry newInquiry = new(InquiryStatus.Open, boardgameName, customerName, customerEmail, customerID);
-
-            _Inquiries.Add(newInquiry);
+            Controller.AddInquiry(newInquiry);
         }
 
         //RegisterInquiry metoden er en metode der tager et inquiry objekt som parameter og tilføjer det til customerens liste af inquiries.
         public static void UpdateInquiry()
         {
             Console.WriteLine("Enter customer email: ");
-            string customerID = Console.ReadLine() ?? "";
-            Inquiry inquiry = _Inquiries.Find(x => x.Email == customerID);
+            Inquiry inquiry = Controller.GetInquiry(Console.ReadLine() ?? "");
 
             if (inquiry == null)
             {
@@ -124,7 +97,8 @@ namespace genspil.inventory
 
         public static void PrintInquiries()
         {
-            foreach (Inquiry inquiry in _Inquiries)
+            List<Inquiry> inqueries = Controller.GetAllInqueries();
+            foreach (Inquiry inquiry in inqueries)
             {
                 inquiry.PrintInquiry();
             }
@@ -135,10 +109,14 @@ namespace genspil.inventory
         {
             Console.Clear();
             int gameCount = 1;
-            foreach (Boardgame boardgame in _BoardGames)
+
+            List<Boardgame> boardGames = Controller.GetAllBoardGames();
+
+            foreach (Boardgame boardgame in boardGames)
             {
                 Console.WriteLine($"Game: {gameCount}");
-                boardgame.PrintBoardGame();
+                Console.WriteLine(boardgame.ToString());
+                Console.WriteLine("---------------------");
             }
         }
 

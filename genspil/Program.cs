@@ -1,9 +1,6 @@
-﻿using System.Runtime.CompilerServices;
-using System.Xml.Linq;
-using genspil.inventory;
+﻿using genspil.inventory;
 using genspil.Enums;
 using genspil.Database;
-using System.IO;
 
 namespace genspil
 {
@@ -67,7 +64,7 @@ namespace genspil
             {
                 Console.WriteLine("Enter Board ID: ");
                 boardID = Console.ReadLine() ?? "";
-                if (!InventorySystem.DoesGameExsist(boardID))
+                if (!Controller.DoesGameExsist(boardID))
                 {
                     Console.WriteLine($"{boardID} does not exist");
                     return;
