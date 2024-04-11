@@ -47,6 +47,37 @@ namespace genspil.Database
             SaveBoardGame(boardgame);
         }
 
+        public static void SaveInquiryChanges(Inquiry inquiry)
+        {
+            DeleteInquiry(inquiry.InquiryID);
+            SaveInquiry(inquiry);
+        }
+
+        public static void DeleteInquiry(string inquiryID)
+        {
+            List<string> lines = new List<string>();
+            using (StreamReader reader = new StreamReader("Inquiries.txt"))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null) // Read the file and display it line by line.
+                {
+                    string[] parts = line.Split(','); // Split the line into parts
+
+                    if (parts[5] == inquiryID) // If the ID matches the ID we want to delete, skip this line
+                    {
+                        continue;
+                    }
+                    lines.Add(line); // Add the line to the list of lines
+                }
+            }
+            using (StreamWriter writer = new StreamWriter("Inquiries.txt"))
+            {
+                foreach (string line in lines) // Write all the lines back to the file, except the one we want to delete
+                {
+                    writer.WriteLine(line);
+                }
+            }
+        }
 
         public static void DeleteBoardGame(string boardgameID)
         {
@@ -85,15 +116,15 @@ namespace genspil.Database
                     string[] parts = line.Split(',');
 
                     InquiryStatus status = (InquiryStatus)Enum.Parse(typeof(InquiryStatus), parts[0]);
-                    string boardgameName = parts[1];
-                    string customerName = parts[2];
-                    string customerEmail = parts[3];
-                    string customerID = parts[4];
-                    string inquiryId = parts[5];
+                    string inquiryID = parts[1];
+                    string boardgameName = parts[2];
+                    string customerName = parts[3];
+                    string customerEmail = parts[4];
+                    string customerID = parts[5];
                     DateTime creationDate = DateTime.Parse(parts[6]);
 
-                    InventorySystem.RegisterInquiry(status, boardgameName, customerName, customerEmail, customerID, inquiryId, creationDate);
-                }
+                    InventorySystem.RegisterInquiry(status, inquiryID, boardgameName, customerName, customerEmail, customerID, creationDate);
+                } 
             }
             return inquiries;
         }

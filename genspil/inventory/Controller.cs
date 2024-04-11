@@ -18,6 +18,13 @@
             return boardgame != null;
         }
 
+        public static bool DoesInquiryExist(string id)
+        {
+            Inquiry inquiry = GetInquiry(id);
+
+            return inquiry != null;
+        }
+
         public static List<Boardgame> GetSearchedGames(string searchTerm) => (List<Boardgame>)_BoardGames.Where(boardgame =>
             boardgame.Name.Contains(searchTerm) ||
             boardgame.Genre.Contains(searchTerm) ||

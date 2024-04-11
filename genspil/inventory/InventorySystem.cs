@@ -40,6 +40,19 @@ namespace genspil.inventory
             DataHandler.SaveBoardGameChanges(board);
         }
 
+        public static void changeInquiry(string id, InquiryStatus newStatus)
+        {
+            Inquiry inquiry = Controller.GetInquiry(id);
+            if (inquiry == null)
+            {
+                Console.WriteLine("Inquiry not found...");
+                return;
+            }
+
+            inquiry.UpdateInquiryStatus(newStatus);
+            DataHandler.SaveInquiryChanges(inquiry);
+        }
+
         //UpdateGame metoden er en metode der tager et boardgame objekt som parameter og opdaterer det i listen af boardgames.
         public static void DeleteGame()
         {
@@ -87,22 +100,25 @@ namespace genspil.inventory
         }
 
         //RegisterInquiry metoden er en metode der tager et inquiry objekt som parameter og tilføjer det til customerens liste af inquiries.
-        public static void UpdateInquiry()
-        {
-            Console.WriteLine("Enter inquiry ID: ");
-            Inquiry inquiry = Controller.GetInquiry(Console.ReadLine() ?? "");
+        //public static void UpdateInquiry()
+        //{
 
-            if (inquiry == null)
-            {
-                Console.WriteLine("Inquiry not found.");
-                return;
-            }
+        //    Console.WriteLine("Enter inquiry ID: ");
+        //    Inquiry inquiry = Controller.GetInquiry(Console.ReadLine() ?? "");
+
+        //    if (inquiry == null)
+        //    {
+        //        Console.WriteLine("Inquiry not found.");
+        //        return;
+        //    }
 
 
-            Console.WriteLine("Update inquiry status");
+        //    Console.WriteLine("Update inquiry status");
 
-            InquiryStatus newStatus = Enum.Parse<InquiryStatus>(Utilities.SelectEnumString("inquiry"));
-        }
+        //    InquiryStatus newStatus = Enum.Parse<InquiryStatus>(Utilities.SelectEnumString("inquiry"));
+        //    inquiry.UpdateInquiryStatus(newStatus);
+        //    DataHandler.SaveInquiryChanges(inquiry);
+        //}
 
         public static void PrintInquiries()
         {

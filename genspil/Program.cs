@@ -52,13 +52,31 @@ namespace genspil
             Console.WriteLine("Enter Boardgame name: ");
             string boardgameName = Console.ReadLine() ?? "";
             Console.WriteLine("Enter Inquiry ID: ");
-            string inquiryId = Console.ReadLine() ?? "";
+            string inquiryID = Console.ReadLine() ?? "";
             InquiryStatus status = Enum.Parse<InquiryStatus>(Utilities.SelectEnumString("inquiry"));
 
-            InventorySystem.RegisterInquiry(status, boardgameName, customerName, customerEmail, customerID, inquiryId, DateTime.Now, true);
+            InventorySystem.RegisterInquiry(status, inquiryID, boardgameName, customerName, customerEmail, customerID, DateTime.Now, true);
+        }                              
+
+        static void UpdateInquiryStatus(string? inquiryID = null)
+        {
+            Console.Clear();
+            
+            if (inquiryID == null)
+            {
+                Console.WriteLine("Enter Inquiry ID: ");
+                inquiryID = Console.ReadLine() ?? "";
+                if (Controller.DoesInquiryExist(inquiryID))
+                {
+                    Console.WriteLine($"{inquiryID} does not exist");
+                    return;
+                }
+            }
+            Console.WriteLine("Change Status: ");
+            InventorySystem.changeInquiry(inquiryID, Enum.Parse<InquiryStatus>(Utilities.SelectEnumString("inquiry")));
+            
+            
         }
-
-
 
         static void ConfirmExit()
         {
@@ -83,6 +101,7 @@ namespace genspil
                     Console.WriteLine($"{boardID} does not exist");
                     return;
                 }
+               
             }
 
             Console.WriteLine("1. Change Minimum Players \n" + 
@@ -122,6 +141,8 @@ namespace genspil
                 UpdateGame(boardID);
             }
         }
+        
+       
 
         static void Main()
         {
@@ -163,7 +184,7 @@ namespace genspil
                     AddInquiry();
                     break;
                 case "6":
-                    InventorySystem.UpdateInquiry();
+                        UpdateInquiryStatus();
                     break;
                 case "7":
                     InventorySystem.PrintInventoryList();
