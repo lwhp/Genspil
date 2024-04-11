@@ -91,5 +91,16 @@ namespace genspil.Database
             }
             return inquiries;
         }
+
+        public Inquiry SaveInquiry(Inquiry inquiry)
+        {
+            StreamWriter writer = new StreamWriter(DataFileName, true);
+            {
+                writer.WriteLine(inquiry.MakeTitle());
+            }
+            writer.Close();
+
+            return inquiry;
+        }
     }    
 }
