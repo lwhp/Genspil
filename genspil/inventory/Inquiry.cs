@@ -30,6 +30,7 @@ namespace genspil.inventory
         {
             status = newStatus;
         }
+        
         public string MakeTitle() => $"{status},{boardgameName},{customerName},{customerEmail},{customerID},{creationDate}";
     }
 }

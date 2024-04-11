@@ -40,6 +40,22 @@ namespace genspil
             InventorySystem.AddGame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
             DataHandler.SaveBoardGame(new Boardgame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID));
         }
+        static void AddInquiry()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter customer name: ");
+            string customerName = Console.ReadLine() ?? "";
+            Console.WriteLine("Enter customer email: ");
+            string customerEmail = Console.ReadLine() ?? "";
+            Console.WriteLine("Enter customer ID: ");
+            string customerID = Console.ReadLine() ?? "";
+            Console.WriteLine("Enter Boardgame name: ");
+            string boardgameName = Console.ReadLine() ?? "";
+            InquiryStatus status = Enum.Parse<InquiryStatus>(Utilities.SelectEnumString("status"));
+
+            InventorySystem.RegisterInquiry(new Inquiry(status, boardgameName, customerName, customerEmail, customerID));
+            DataHandler.SaveInquiry(new Inquiry(status, boardgameName, customerName, customerEmail, customerID));
+        }
 
 
 
@@ -143,7 +159,7 @@ namespace genspil
                     InventorySystem.SearchGame();
                     break;
                 case "5":
-                    InventorySystem.RegisterInquiry();
+                    AddInquiry();
                     break;
                 case "6":
                     InventorySystem.UpdateInquiry();
