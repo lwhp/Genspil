@@ -100,8 +100,8 @@ namespace genspil
                     InventorySystem.ChangeGame(boardID, null, Utilities.GetNumberFromInput());
                     break;
                 case "3":
-                    Console.Write("Enter new genre: ");
-                    InventorySystem.ChangeGame(boardID, null, null, Console.ReadLine() ?? "");
+                    Console.Write("Select Genre");
+                    InventorySystem.ChangeGame(boardID, null, null, Utilities.SelectEnumString("genre"));
                     break;
                 case "4":
                     Console.Write("Enter new game name: ");

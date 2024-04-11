@@ -37,6 +37,7 @@ namespace genspil.inventory
             }
 
             board.ChangeBoardSettings(min, max, genre, name, newCondition);
+            DataHandler.SaveBoardGameChanges(board);
         }
 
         //UpdateGame metoden er en metode der tager et boardgame objekt som parameter og opdaterer det i listen af boardgames.

@@ -32,7 +32,6 @@ namespace genspil.Database
         }
         public static Boardgame SaveBoardGame(Boardgame boardgame)
         {
-
             StreamWriter writer = new StreamWriter("BoardGames.txt", true);
             {
                 writer.WriteLine(boardgame.MakeTitle());
@@ -40,8 +39,15 @@ namespace genspil.Database
             writer.Close();
 
             return boardgame;
-
         }
+
+        public static void SaveBoardGameChanges(Boardgame boardgame)
+        {
+            DeleteBoardGame(boardgame.BoardGameId);
+            SaveBoardGame(boardgame);
+        }
+
+
         public static void DeleteBoardGame(string boardgameID)
         {
             List<string> lines = new List<string>();
