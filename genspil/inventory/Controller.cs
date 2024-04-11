@@ -21,7 +21,7 @@
         public static List<Boardgame> GetSearchedGames(string searchTerm) => (List<Boardgame>)_BoardGames.Where(boardgame =>
             boardgame.Name.Contains(searchTerm) ||
             boardgame.Genre.Contains(searchTerm) ||
-            boardgame.BoardGameId.Contains(searchTerm));
+            boardgame.BoardGameId.Contains(searchTerm)).ToList();
 
         public static List<Boardgame> GetAllBoardGames() => _BoardGames;
 
