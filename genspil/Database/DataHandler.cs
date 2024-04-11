@@ -3,14 +3,12 @@ using genspil.inventory;
 
 namespace genspil.Database
 {
-    public class DataHandler(string dataFileName)
+    public static class DataHandler
     {
-        public string DataFileName { get; } = dataFileName;
-
-        public List<Boardgame> LoadBoardgames()
+        public static List<Boardgame> LoadBoardgames()
         {
             List<Boardgame> boardgames = new List<Boardgame>();
-            using (StreamReader reader = new StreamReader(DataFileName))
+            using (StreamReader reader = new StreamReader("BoardGames.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -32,10 +30,10 @@ namespace genspil.Database
             }
             return boardgames;
         }
-        public Boardgame SaveBoardGame(Boardgame boardgame)
+        public static Boardgame SaveBoardGame(Boardgame boardgame)
         {
 
-            StreamWriter writer = new StreamWriter(DataFileName, true);
+            StreamWriter writer = new StreamWriter("BoardGames.txt", true);
             {
                 writer.WriteLine(boardgame.MakeTitle());
             }
@@ -44,10 +42,10 @@ namespace genspil.Database
             return boardgame;
 
         }
-        public void DeleteBoardGame(string boardgameID)
+        public static void DeleteBoardGame(string boardgameID)
         {
             List<string> lines = new List<string>();
-            using (StreamReader reader = new StreamReader(DataFileName))
+            using (StreamReader reader = new StreamReader("BoardGames.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null) // Read the file and display it line by line.
@@ -61,7 +59,7 @@ namespace genspil.Database
                     lines.Add(line); // Add the line to the list of lines
                 }
             }
-            using (StreamWriter writer = new StreamWriter(DataFileName))
+            using (StreamWriter writer = new StreamWriter("BoardGames.txt"))
             {
                 foreach (string line in lines) // Write all the lines back to the file, except the one we want to delete
                 {
@@ -70,10 +68,10 @@ namespace genspil.Database
             }
         }
 
-        public List<Inquiry> LoadInquiries()
+        public static List<Inquiry> LoadInquiries()
         {
             List<Inquiry> inquiries = new List<Inquiry>();
-            using (StreamReader reader = new StreamReader(DataFileName))
+            using (StreamReader reader = new StreamReader("Inquiries.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)

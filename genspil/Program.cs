@@ -6,9 +6,6 @@ namespace genspil
 {
     internal class Program
     {
-        private static DataHandler dataHandler = new DataHandler("BoardGames.txt");
-        private static DataHandler dataHandlerInquiries = new DataHandler("Inquiries.txt");
-        
         static void AddGame()
         {
             Console.Clear();
@@ -41,7 +38,7 @@ namespace genspil
             string boardgameID = Console.ReadLine() ?? "";
 
             InventorySystem.AddGame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
-            dataHandler.SaveBoardGame(new Boardgame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID));
+            DataHandler.SaveBoardGame(new Boardgame(name, genre, minPlayers, maxPlayers, condition, price, boardgameID));
         }
 
 
@@ -111,8 +108,8 @@ namespace genspil
 
         static void Main()
         {
-            var boardgames = dataHandler.LoadBoardgames();
-            var inquiries = dataHandlerInquiries.LoadInquiries();
+            DataHandler.LoadBoardgames();
+            DataHandler.LoadInquiries();
             while (true)
             {
                 Console.Clear();

@@ -38,8 +38,7 @@ namespace genspil.inventory
                 return;
             }
 
-            DataHandler dataHandler = new DataHandler("BoardGames.txt");
-            dataHandler.DeleteBoardGame(boardgameID);
+            DataHandler.DeleteBoardGame(boardgameID);
             Controller.DeleteGame(boardgameID);
         }
 
