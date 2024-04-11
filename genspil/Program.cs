@@ -66,7 +66,7 @@ namespace genspil
             {
                 Console.WriteLine("Enter Inquiry ID: ");
                 inquiryID = Console.ReadLine() ?? "";
-                if (Controller.DoesInquiryExist(inquiryID))
+                if (!Controller.DoesInquiryExist(inquiryID))
                 {
                     Console.WriteLine($"{inquiryID} does not exist");
                     return;
