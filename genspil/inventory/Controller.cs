@@ -28,6 +28,8 @@
         public static void AddGame(Boardgame boardgame)
         {
             _BoardGames.Add(boardgame);
+
+            Console.WriteLine("Boardgame has successfully been added!");
         }
 
         public static void AddInquiry(Inquiry inquiry)

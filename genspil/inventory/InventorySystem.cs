@@ -8,7 +8,20 @@ namespace genspil.inventory
         //AddGame metoden er en metode der tager et boardgame objekt som parameter og tilføjer det til listen af boardgames.
         internal static void AddGame(string name, string genre, int minPlayers, int maxPlayers, Condition condition, float price, string boardgameID)
         {
-            
+            bool boardIdExsist = Controller.DoesGameExsist(boardgameID);
+
+            if (boardIdExsist)
+            {
+                Console.WriteLine("Error! Game already exsist");
+                return;
+            }
+
+            if (minPlayers > maxPlayers)
+            {
+                Console.WriteLine("Error! Minimum players cannot be above maximum players!");
+                return;
+            }
+
             Boardgame boardgame = new(name, genre, minPlayers, maxPlayers, condition, price, boardgameID);
             Controller.AddGame(boardgame);            
         }
