@@ -92,9 +92,9 @@ namespace genspil.Database
             return inquiries;
         }
 
-        public Inquiry SaveInquiry(Inquiry inquiry)
+        public static Inquiry SaveInquiry(Inquiry inquiry)
         {
-            StreamWriter writer = new StreamWriter(DataFileName, true);
+            StreamWriter writer = new StreamWriter("Inquiries.txt", true);
             {
                 writer.WriteLine(inquiry.MakeTitle());
             }

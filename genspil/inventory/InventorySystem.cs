@@ -74,8 +74,7 @@ namespace genspil.inventory
 
             Inquiry newInquiry = new(InquiryStatus.Open, boardgameName, customerName, customerEmail, customerID);
             Controller.AddInquiry(newInquiry);
-            DataHandler dataHandler = new DataHandler("Inquiries.txt");
-            dataHandler.SaveInquiry(newInquiry);
+            DataHandler.SaveInquiry(newInquiry);
         }
 
         //RegisterInquiry metoden er en metode der tager et inquiry objekt som parameter og tilføjer det til customerens liste af inquiries.
