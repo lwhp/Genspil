@@ -89,9 +89,10 @@ namespace genspil.Database
                     string customerName = parts[2];
                     string customerEmail = parts[3];
                     string customerID = parts[4];
-                    DateTime creationDate = DateTime.Parse(parts[5]);
+                    string inquiryId = parts[5];
+                    DateTime creationDate = DateTime.Parse(parts[6]);
 
-                    InventorySystem.RegisterInquiry(status, boardgameName, customerName, customerEmail, customerID, creationDate);
+                    InventorySystem.RegisterInquiry(status, boardgameName, customerName, customerEmail, customerID, inquiryId, creationDate);
                 }
             }
             return inquiries;

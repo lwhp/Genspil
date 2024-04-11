@@ -51,9 +51,11 @@ namespace genspil
             string customerID = Console.ReadLine() ?? "";
             Console.WriteLine("Enter Boardgame name: ");
             string boardgameName = Console.ReadLine() ?? "";
+            Console.WriteLine("Enter Inquiry ID: ");
+            string inquiryId = Console.ReadLine() ?? "";
             InquiryStatus status = Enum.Parse<InquiryStatus>(Utilities.SelectEnumString("inquiry"));
 
-            InventorySystem.RegisterInquiry(status, boardgameName, customerName, customerEmail, customerID, DateTime.Now, true);
+            InventorySystem.RegisterInquiry(status, boardgameName, customerName, customerEmail, customerID, inquiryId, DateTime.Now, true);
         }
 
 

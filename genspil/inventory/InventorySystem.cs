@@ -75,9 +75,9 @@ namespace genspil.inventory
         }
 
         //SearchGame metoden er en metode der tager et boardgame objekt som parameter og søger efter det i listen af boardgames.
-        public static void RegisterInquiry(InquiryStatus status, string boardgameName, string customerName, string customerEmail, string customerID, DateTime creationDate, bool saveInquery = false)
+        public static void RegisterInquiry(InquiryStatus status, string boardgameName, string customerName, string customerEmail, string customerID, string inquiryId, DateTime creationDate, bool saveInquery = false)
         {
-            Inquiry inquiry = new(status, boardgameName, customerName, customerEmail, customerID, creationDate);
+            Inquiry inquiry = new(status, boardgameName, customerName, customerEmail, customerID, inquiryId, creationDate);
             Controller.AddInquiry(inquiry);
 
             if (saveInquery)
@@ -89,7 +89,7 @@ namespace genspil.inventory
         //RegisterInquiry metoden er en metode der tager et inquiry objekt som parameter og tilføjer det til customerens liste af inquiries.
         public static void UpdateInquiry()
         {
-            Console.WriteLine("Enter customer email: ");
+            Console.WriteLine("Enter inquiry ID: ");
             Inquiry inquiry = Controller.GetInquiry(Console.ReadLine() ?? "");
 
             if (inquiry == null)

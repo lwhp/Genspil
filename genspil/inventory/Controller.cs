@@ -7,7 +7,7 @@
 
         public static Boardgame GetBoardGame(string id) => _BoardGames.Find(boardgame => boardgame.BoardGameId == id) ?? null;
 
-        public static Inquiry GetInquiry(string email) => _Inquiries.Find(inquiry => inquiry.Email == email) ?? null;
+        public static Inquiry GetInquiry(string id) => _Inquiries.Find(inquiry => inquiry.InquiryID == id) ?? null;
 
         public static List<Inquiry> GetAllInqueries() => _Inquiries;
 

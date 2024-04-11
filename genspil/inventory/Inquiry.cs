@@ -8,21 +8,22 @@ using genspil.Enums;
 
 namespace genspil.inventory
 {
-    public class Inquiry(InquiryStatus status, string boardgameName, string customerName, string customerEmail, string customerID, DateTime? creationDate = null)
+    public class Inquiry(InquiryStatus status, string boardgameName, string customerName, string customerEmail, string customerID,string inquiryID, DateTime? creationDate = null)
     {
         public InquiryStatus Status { get; set; } = status;
         public DateTime CreationDate { get; } = creationDate ?? DateTime.Now;
-
+        public string InquiryID { get; } = inquiryID;
         public string Email { get; } = customerEmail;
 
         public void PrintInquiry()
         {
             Console.WriteLine("Status: {0} \n" +
-                "Creation Date: {1} \n" +
-                "Customer: {2} \n" +
-                "Boardgame: {3} \n" +
+                "Inquiry ID: {1} \n" +
+                "Creation Date: {2} \n" +
+                "Customer: {3} \n" +
+                "Boardgame: {4} \n" +
                 "______________________________",
-                status, CreationDate, customerName, boardgameName
+                status, inquiryID, CreationDate, customerName, boardgameName
             );
         }
 
@@ -31,6 +32,6 @@ namespace genspil.inventory
             status = newStatus;
         }
         
-        public string MakeTitle() => $"{status},{boardgameName},{customerName},{customerEmail},{customerID},{creationDate}";
+        public string MakeTitle() => $"{status}, {inquiryID} {boardgameName},{customerName},{customerEmail},{customerID},{creationDate}";
     }
 }
