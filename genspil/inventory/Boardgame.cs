@@ -4,10 +4,20 @@ namespace genspil.inventory
 {
     public class Boardgame(string name, string genre, int minPlayers, int maxPlayers, Condition conditions, float price, string boardgameID)
     {
-        public string Name { get; } = name;
-        public string Genre { get; } = genre; 
+        public string BoardGameId
+        {
+            get { return boardgameID; }
+        }
 
-        public string BoardGameId { get; } = boardgameID;
+        public string Genre
+        {
+            get { return genre; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+        }
 
         public void ChangeBoardSettings(int? min = null, int? max = null, string? newGenre = null, string? newName = null, Condition? newCondition = null)
         {

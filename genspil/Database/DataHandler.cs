@@ -11,6 +11,7 @@ namespace genspil.Database
             using (StreamReader reader = new("BoardGames.txt"))
             {
                 string line;
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split(',');
@@ -27,6 +28,7 @@ namespace genspil.Database
                     
 
                 }
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
             }
 
             return boardgames;
@@ -60,6 +62,7 @@ namespace genspil.Database
             using (StreamReader reader = new("Inquiries.txt"))
             {
                 string line;
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 while ((line = reader.ReadLine()) != null) // Read the file and display it line by line.
                 {
                     string[] parts = line.Split(','); // Split the line into parts
@@ -70,6 +73,7 @@ namespace genspil.Database
                     }
                     lines.Add(line); // Add the line to the list of lines
                 }
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
             }
 
             using StreamWriter writer = new("Inquiries.txt");
@@ -85,6 +89,7 @@ namespace genspil.Database
             using (StreamReader reader = new("BoardGames.txt"))
             {
                 string line;
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 while ((line = reader.ReadLine()) != null) // Read the file and display it line by line.
                 {
                     string[] parts = line.Split(','); // Split the line into parts
@@ -95,6 +100,7 @@ namespace genspil.Database
                     }
                     lines.Add(line); // Add the line to the list of lines
                 }
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
             }
 
             using StreamWriter writer = new("BoardGames.txt");
@@ -110,6 +116,7 @@ namespace genspil.Database
             using (StreamReader reader = new("Inquiries.txt"))
             {
                 string line;
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split(',');
@@ -124,6 +131,7 @@ namespace genspil.Database
 
                     InventorySystem.RegisterInquiry(status, inquiryID, boardgameName, customerName, customerEmail, customerID, creationDate);
                 } 
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
             }
             return inquiries;
         }
