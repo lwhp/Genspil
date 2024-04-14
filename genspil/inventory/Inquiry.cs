@@ -3,17 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using genspil.Enums;
 
 namespace genspil.inventory
 {
     public class Inquiry(InquiryStatus status, string inquiryID, string boardgameName, string customerName, string customerEmail, string customerID, DateTime? creationDate = null)
     {       
-        public InquiryStatus Status { get; set; } = status;
-        public DateTime CreationDate { get; } = creationDate ?? DateTime.Now;
-        public string InquiryID { get; } = inquiryID;
-        public string Email { get; } = customerEmail;
+        public InquiryStatus Status 
+        { 
+            get { return status; } 
+        }
+
+        public DateTime CreationDate
+        {
+            get { return creationDate ?? DateTime.Now; }
+        }
+
+        public string InquiryID
+        {
+            get { return inquiryID; }
+        }
+
+        public string Email
+        {
+            get { return customerEmail; }
+        }
 
         public void PrintInquiry()
         {
