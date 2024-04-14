@@ -99,33 +99,15 @@ namespace genspil.inventory
             }
         }
 
-        //RegisterInquiry metoden er en metode der tager et inquiry objekt som parameter og tilføjer det til customerens liste af inquiries.
-        //public static void UpdateInquiry()
-        //{
-
-        //    Console.WriteLine("Enter inquiry ID: ");
-        //    Inquiry inquiry = Controller.GetInquiry(Console.ReadLine() ?? "");
-
-        //    if (inquiry == null)
-        //    {
-        //        Console.WriteLine("Inquiry not found.");
-        //        return;
-        //    }
-
-
-        //    Console.WriteLine("Update inquiry status");
-
-        //    InquiryStatus newStatus = Enum.Parse<InquiryStatus>(Utilities.SelectEnumString("inquiry"));
-        //    inquiry.UpdateInquiryStatus(newStatus);
-        //    DataHandler.SaveInquiryChanges(inquiry);
-        //}
-
         public static void PrintInquiries()
         {
             List<Inquiry> inqueries = Controller.GetAllInqueries();
             foreach (Inquiry inquiry in inqueries)
             {
-                inquiry.PrintInquiry();
+                if (inquiry.Status != InquiryStatus.Resolved & inquiry.Status != InquiryStatus.Closed)
+                {
+                    inquiry.PrintInquiry();
+                }
             }
         }
 
