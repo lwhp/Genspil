@@ -7,8 +7,8 @@ namespace genspil.Database
     {
         public static List<Boardgame> LoadBoardgames()
         {
-            List<Boardgame> boardgames = new List<Boardgame>();
-            using (StreamReader reader = new StreamReader("BoardGames.txt"))
+            List<Boardgame> boardgames = [];
+            using (StreamReader reader = new("BoardGames.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -28,11 +28,12 @@ namespace genspil.Database
 
                 }
             }
+
             return boardgames;
         }
         public static Boardgame SaveBoardGame(Boardgame boardgame)
         {
-            StreamWriter writer = new StreamWriter("BoardGames.txt", true);
+            StreamWriter writer = new("BoardGames.txt", true);
             {
                 writer.WriteLine(boardgame.MakeTitle());
             }
@@ -55,8 +56,8 @@ namespace genspil.Database
 
         public static void DeleteInquiry(string inquiryID)
         {
-            List<string> lines = new List<string>();
-            using (StreamReader reader = new StreamReader("Inquiries.txt"))
+            List<string> lines = [];
+            using (StreamReader reader = new("Inquiries.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null) // Read the file and display it line by line.
@@ -70,19 +71,18 @@ namespace genspil.Database
                     lines.Add(line); // Add the line to the list of lines
                 }
             }
-            using (StreamWriter writer = new StreamWriter("Inquiries.txt"))
+
+            using StreamWriter writer = new("Inquiries.txt");
+            foreach (string line in lines) // Write all the lines back to the file, except the one we want to delete
             {
-                foreach (string line in lines) // Write all the lines back to the file, except the one we want to delete
-                {
-                    writer.WriteLine(line);
-                }
+                writer.WriteLine(line);
             }
         }
 
         public static void DeleteBoardGame(string boardgameID)
         {
-            List<string> lines = new List<string>();
-            using (StreamReader reader = new StreamReader("BoardGames.txt"))
+            List<string> lines = [];
+            using (StreamReader reader = new("BoardGames.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null) // Read the file and display it line by line.
@@ -96,19 +96,18 @@ namespace genspil.Database
                     lines.Add(line); // Add the line to the list of lines
                 }
             }
-            using (StreamWriter writer = new StreamWriter("BoardGames.txt"))
+
+            using StreamWriter writer = new("BoardGames.txt");
+            foreach (string line in lines) // Write all the lines back to the file, except the one we want to delete
             {
-                foreach (string line in lines) // Write all the lines back to the file, except the one we want to delete
-                {
-                    writer.WriteLine(line);
-                }
+                writer.WriteLine(line);
             }
         }
 
         public static List<Inquiry> LoadInquiries()
         {
-            List<Inquiry> inquiries = new List<Inquiry>();
-            using (StreamReader reader = new StreamReader("Inquiries.txt"))
+            List<Inquiry> inquiries = [];
+            using (StreamReader reader = new("Inquiries.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -131,7 +130,7 @@ namespace genspil.Database
 
         public static Inquiry SaveInquiry(Inquiry inquiry)
         {
-            StreamWriter writer = new StreamWriter("Inquiries.txt", true);
+            StreamWriter writer = new("Inquiries.txt", true);
             {
                 writer.WriteLine(inquiry.MakeTitle());
             }
