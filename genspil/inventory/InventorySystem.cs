@@ -6,7 +6,7 @@ namespace genspil.inventory
     public static class InventorySystem
     {
         //AddGame metoden er en metode der tager et boardgame objekt som parameter og tilføjer det til listen af boardgames.
-        internal static void AddGame(string name, string genre, int minPlayers, int maxPlayers, Condition condition, float price, string boardgameID)
+        public static void AddGame(string name, string genre, int minPlayers, int maxPlayers, Condition condition, float price, string boardgameID)
         {
             bool boardIdExsist = Controller.DoesGameExsist(boardgameID);
 
@@ -40,7 +40,7 @@ namespace genspil.inventory
             DataHandler.SaveBoardGameChanges(board);
         }
 
-        public static void changeInquiry(string id, InquiryStatus newStatus)
+        public static void ChangeInquiry(string id, InquiryStatus newStatus)
         {
             Inquiry inquiry = Controller.GetInquiry(id);
             if (inquiry == null)

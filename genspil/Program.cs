@@ -73,7 +73,7 @@ namespace genspil
                 }
             }
             Console.WriteLine("Change Status: ");
-            InventorySystem.changeInquiry(inquiryID, Enum.Parse<InquiryStatus>(Utilities.SelectEnumString("inquiry")));
+            InventorySystem.ChangeInquiry(inquiryID, Enum.Parse<InquiryStatus>(Utilities.SelectEnumString("inquiry")));
             
             
         }
